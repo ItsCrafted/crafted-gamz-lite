@@ -22,7 +22,7 @@
         </div>
       </div>
       <div id="gme_list" class="game-container">
-        <p class="loading">Loading games...</p>
+        <p class="loading">Loading, Please Hold...</p>
       </div>
     </body>
   </foreignObject>
@@ -72,7 +72,7 @@
         });
         render_gmes(filtered);
       });
-      fetch("https://cdn.jsdelivr.net/gh/Hydra-Network/bromine@main/src/data/gmes.json?t=" + Date.now())
+      fetch("https://cdn.jsdelivr.net/gh/ItsCrafted/crafted-gamz-lite@main/g.json?t=" + Date.now())
         .then(function(res) { return res.json(); })
         .then(function(data) {
           gmes_data = data;
