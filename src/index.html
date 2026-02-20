@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crafted Gamz Lite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#080808;--surface:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.07);
+    --border-hover:rgba(255,255,255,0.18);--text-primary:#f0f0f0;--text-secondary:#888;
+    --text-muted:#444;--accent:#ffffff;
+  }
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text-primary);min-height:100vh;overflow-x:hidden}
+
+  .header{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(8,8,8,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;justify-content:space-between;z-index:100}
+  .header-left{display:flex;align-items:center;gap:12px}
+  .header-logo{width:28px;height:28px;background:linear-gradient(135deg,#3a3a3a,#1a1a1a);border-radius:8px;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#fff}
+  .header-title{font-size:15px;font-weight:600;letter-spacing:-0.01em;color:var(--text-primary)}
+  .header-badge{font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:#ccc;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:3px 8px}
+  .header-version{font-family:'Space Mono',monospace;font-size:11px;color:var(--text-secondary);letter-spacing:0.04em}
+
+  main{position:relative;z-index:1;padding:96px 28px 60px;max-width:900px;margin:0 auto}
+
+  .hero{margin-bottom:48px;animation:fadeUp 0.5s ease both}
+  .hero-eyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .hero-eyebrow::before{content:'';width:24px;height:1px;background:rgba(255,255,255,0.3);display:inline-block}
+  .hero-title{font-size:clamp(30px,5vw,46px);font-weight:600;letter-spacing:-0.03em;line-height:1.1;margin-bottom:14px}
+  .hero-title em{font-style:normal;color:#fff}
+  .hero-desc{font-size:15px;color:var(--text-secondary);line-height:1.6;max-width:540px}
+
+  .stats-row{display:flex;gap:24px;margin-bottom:44px;flex-wrap:wrap;animation:fadeUp 0.5s 0.1s ease both}
+  .stat{display:flex;flex-direction:column;gap:2px}
+  .stat-num{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;letter-spacing:-0.02em}
+  .stat-label{font-size:12px;color:var(--text-muted);letter-spacing:0.04em;text-transform:uppercase}
+  .stat-divider{width:1px;background:var(--border);align-self:stretch;margin:4px 0}
+
+  .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;animation:fadeUp 0.5s 0.15s ease both}
+  .section-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted)}
+  .file-count{font-size:12px;color:var(--text-muted)}
+  .file-count span{color:var(--text-secondary);font-weight:500}
+
+  .download-list{display:flex;flex-direction:column;gap:8px}
+
+  .download-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all 0.18s ease;position:relative;overflow:hidden;text-decoration:none;color:inherit;animation:fadeUp 0.4s ease both}
+  .download-item::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent)}
+  .download-item:hover{background:rgba(255,255,255,0.05);border-color:var(--border-hover);transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+  .download-item:hover .dl-btn{background:#fff;border-color:#fff}
+  .download-item:hover .dl-btn svg{stroke:#080808;animation:dlBounce 0.35s ease}
+
+  .file-icon{width:40px;height:40px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.04em;color:rgba(255,255,255,0.4)}
+  .file-info{flex:1;min-width:0}
+  .file-name{font-size:14px;font-weight:500;color:var(--text-primary);letter-spacing:-0.01em;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .file-desc{font-size:12px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .file-meta{display:flex;align-items:center;gap:12px;flex-shrink:0}
+  .file-size{font-family:'Space Mono',monospace;font-size:11px;color:var(--text-muted);letter-spacing:0.02em;white-space:nowrap}
+  .dl-btn{width:36px;height:36px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all 0.18s ease;flex-shrink:0}
+  .dl-btn svg{width:15px;height:15px;stroke:var(--text-secondary);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:stroke 0.18s ease}
+
+  .footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;animation:fadeUp 0.5s 0.3s ease both}
+  .footer-text{font-size:12px;color:var(--text-muted)}
+  .footer-text strong{color:var(--text-secondary);font-weight:500}
+  .footer-mono{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:0.06em}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes dlBounce{0%{transform:translateY(0)}40%{transform:translateY(3px)}100%{transform:translateY(0)}}
+
+  @media(max-width:600px){
+    .file-desc{display:none}
+    main{padding:80px 16px 40px}
+    .header{padding:0 16px}
+    .stats-row{gap:16px}
+    .footer{flex-direction:column;gap:8px;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <div class="header-logo">CG</div>
+    <span class="header-title">Crafted Gamz</span>
+    <span class="header-badge">Lite</span>
+  </div>
+  <span class="header-version">v1.0.0</span>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-eyebrow">Free Download</div>
+    <h1 class="hero-title">Get <em>Crafted Gamz Lite</em></h1>
+    <p class="hero-desc">The lightweight edition of Crafted Gamz.</p>
+  </section>
+
+  <div class="stats-row">
+    <div class="stat">
+      <span class="stat-num">1</span>
+      <span class="stat-label">Packages</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num">Free</span>
+      <span class="stat-label">Always</span>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <span class="section-label">Available Downloads</span>
+    <span class="file-count">Showing <span>1</span> packages</span>
+  </div>
+
+  <div class="download-list">
+    <a class="download-item" href="https://cdn.jsdelivr.net/gh/ItsCrafted/crafted-gamz-lite@main/files/crafted-gamz-lite.svg" download style="animation-delay:0.18s">
+      <div class="file-icon">SVG</div>
+      <div class="file-info">
+        <div class="file-name">crafted-gamz-lite.svg</div>
+        <div class="file-desc">SIx Thousand Games In 1 Image</div>
+      </div>
+      <div class="file-meta">
+        <span class="file-size">10 KB</span>
+        <div class="dl-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v13M5 16l7 7 7-7"/>
+            <line x1="3" y1="21" x2="21" y2="21"/>
+          </svg>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="footer">
+    <p class="footer-text"><strong>Crafted Gamz Lite</strong> is free forever. No account required.</p>
+    <span class="footer-mono">© 2026 CRAFTED GAMZ</span>
+  </div>
+</main>
+
+</body>
+</html>
