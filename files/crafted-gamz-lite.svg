@@ -3,12 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap');
 * { box-sizing: border-box; }
 body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background-color: #080808; color: #e0e0e0; margin: 0; padding: 0; overflow: hidden; }
-.header { position: fixed; top: 0; left: 0; right: 0; height: 56px; background: #080808; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0 28px; display: flex; align-items: center; z-index: 10; }
+.header { position: fixed; top: 0; left: 0; right: 0; height: 56px; background: #080808; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0 28px; display: flex; align-items: center; z-index: 10; }
 .header-left { display: flex; align-items: center; gap: 12px; }
 .header-logo { width: 28px; height: 28px; background: linear-gradient(135deg, #3a3a3a, #1a1a1a); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; }
 .header-title { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: #f0f0f0; }
 .header-badge { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #cccccc; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 3px 8px; }
-.search-container { position: fixed; bottom: 0; left: 0; right: 0; background: #080808; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-top: 1px solid rgba(255,255,255,0.06); padding: 14px 28px; display: flex; align-items: center; justify-content: center; gap: 16px; z-index: 10; }
+.search-container { position: fixed; bottom: 0; left: 0; right: 0; background: #080808; border-top: 1px solid rgba(255,255,255,0.06); padding: 14px 28px; display: flex; align-items: center; justify-content: center; gap: 16px; z-index: 10; }
 .game-count { font-size: 13px; font-weight: 500; color: #888888; letter-spacing: 0.02em; white-space: nowrap; min-width: 80px; }
 .game-count span { color: #cccccc; font-weight: 600; }
 .search-box { position: relative; width: 480px; max-width: 100%; }
@@ -21,11 +21,11 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 .scroll-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); color: #cccccc; }
 .scroll-btn:active { background: rgba(255,255,255,0.12); }
 .game-container { position: fixed; top: 56px; left: 0; right: 0; bottom: 70px; overflow-y: auto; padding: 20px; background-color: #080808; }
-.game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; max-width: 1400px; margin: 0 auto; }
 .game-container::-webkit-scrollbar { width: 6px; }
 .game-container::-webkit-scrollbar-track { background: transparent; }
 .game-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
 .game-container::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+.game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; max-width: 1400px; margin: 0 auto; }
 .game-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 12px; text-align: left; cursor: pointer; transition: all 0.18s ease; position: relative; overflow: hidden; }
 .game-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent); }
 .game-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
@@ -39,9 +39,16 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     <body xmlns="http://www.w3.org/1999/xhtml">
       <div class="header">
         <div class="header-left">
+          <div class="header-logo">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="5" height="5" rx="1.5" fill="rgba(255,255,255,0.5)"/><rect x="8" y="1" width="5" height="5" rx="1.5" fill="rgba(255,255,255,0.3)"/><rect x="1" y="8" width="5" height="5" rx="1.5" fill="rgba(255,255,255,0.3)"/><rect x="8" y="8" width="5" height="5" rx="1.5" fill="rgba(255,255,255,0.15)"/></svg>
+          </div>
           <span class="header-title">Crafted Gamz Lite</span>
           <span class="header-badge">Beta</span>
-          <span class="header-badge">SVG Edition</span>
+        </div>
+      </div>
+      <div id="gme_list" class="game-container">
+        <div class="game-grid" id="gme_grid">
+          <p class="loading">Loading, Please Hold...</p>
         </div>
       </div>
       <div class="search-container">
@@ -57,11 +64,6 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
           <button class="scroll-btn" id="scroll_down">
             <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-        </div>
-      </div>
-      <div id="gme_list" class="game-container">
-        <div class="game-grid" id="gme_grid">
-          <p class="loading">Loading, Please Hold...</p>
         </div>
       </div>
     </body>
