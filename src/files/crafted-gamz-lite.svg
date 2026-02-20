@@ -1,4 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" style="position: fixed; top: 0; left: 0;">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.055)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap');
 * { box-sizing: border-box; }
@@ -21,7 +27,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 .scroll-btn { width: 28px; height: 22px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; color: #888888; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease; }
 .scroll-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); color: #cccccc; }
 .scroll-btn:active { background: rgba(255,255,255,0.12); }
-.game-container { position: fixed; top: 56px; left: 0; right: 0; bottom: 70px; overflow-y: auto; padding: 20px; background-color: #080808; }
+.game-container { position: fixed; top: 56px; left: 0; right: 0; bottom: 70px; overflow-y: auto; padding: 20px; background-color: transparent; }
 .game-container::-webkit-scrollbar { width: 6px; }
 .game-container::-webkit-scrollbar-track { background: transparent; }
 .game-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
@@ -48,6 +54,11 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 .game-viewer-loading { position: absolute; top: 52px; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; color: #333333; font-size: 13px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; pointer-events: none; transition: opacity 0.3s ease; }
 .game-frame { flex: 1; border: none; background: #000; width: 100%; display: block; }
   </style>
+
+  <!-- Grid background -->
+  <rect width="100%" height="100%" fill="#080808"/>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+
   <foreignObject x="0" y="0" width="100%" height="100%">
     <body xmlns="http://www.w3.org/1999/xhtml">
 
@@ -98,6 +109,13 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
   </foreignObject>
   <script><![CDATA[
     (function() {
+      document.title = "Crafted Gamz Lite: SVG Edition";
+      var favicon = document.createElement("link");
+      favicon.rel = "shortcut icon";
+      favicon.type = "image/x-icon";
+      favicon.href = "https://cdn.jsdelivr.net/gh/ItsCrafted/crafted-gamz-lite@main/src/img/icon.png";
+      document.head && document.head.appendChild(favicon);
+
       var gme_list = document.getElementById("gme_list");
       var gme_grid = document.getElementById("gme_grid");
       var gmes_search = document.getElementById("gmes_search");
