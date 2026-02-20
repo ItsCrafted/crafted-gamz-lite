@@ -55,14 +55,12 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 .game-frame { flex: 1; border: none; background: #000; width: 100%; display: block; }
   </style>
 
-  <!-- Grid background -->
   <rect width="100%" height="100%" fill="#080808"/>
   <rect width="100%" height="100%" fill="url(#grid)"/>
 
   <foreignObject x="0" y="0" width="100%" height="100%">
     <body xmlns="http://www.w3.org/1999/xhtml">
 
-      <!-- Game Viewer Overlay -->
       <div class="game-viewer" id="game_viewer">
         <div class="game-viewer-header">
           <button class="back-btn" id="back_btn">
@@ -80,7 +78,6 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div class="header">
         <div class="header-left">
           <span class="header-title">Crafted Gamz Lite</span>
-          <span class="header-badge">Beta</span>
           <span class="header-badge">SVG Edition</span>
         </div>
         <span class="header-credit">Credit to Bromine Network for the idea and the assets</span>
