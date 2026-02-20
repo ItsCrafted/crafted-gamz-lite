@@ -15,7 +15,17 @@
     --text-muted:#444;--accent:#ffffff;
   }
   body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text-primary);min-height:100vh;overflow-x:hidden}
-
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
   .header{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(8,8,8,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;justify-content:space-between;z-index:100}
   .header-left{display:flex;align-items:center;gap:12px}
   .header-logo{width:28px;height:28px;background:linear-gradient(135deg,#3a3a3a,#1a1a1a);border-radius:8px;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#fff}
