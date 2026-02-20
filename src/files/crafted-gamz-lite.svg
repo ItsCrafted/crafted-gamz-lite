@@ -39,11 +39,9 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     <body xmlns="http://www.w3.org/1999/xhtml">
       <div class="header">
         <div class="header-left">
-          <div class="header-logo">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="5" height="5" rx="1.5" fill="rgba(255,255,255,0.5)"/><rect x="8" y="1" width="5" height="5" rx="1.5" fill="rgba(255,255,255,0.3)"/><rect x="1" y="8" width="5" height="5" rx="1.5" fill="rgba(255,255,255,0.3)"/><rect x="8" y="8" width="5" height="5" rx="1.5" fill="rgba(255,255,255,0.15)"/></svg>
-          </div>
           <span class="header-title">Crafted Gamz Lite</span>
           <span class="header-badge">Beta</span>
+          <span class="header-badge">SVG Edition</span>
         </div>
       </div>
       <div id="gme_list" class="game-container">
